@@ -4,9 +4,10 @@ config();//and then 2
 
 import User from "./models/user-model";
 import Booking from "./models/booking-model";
+import ContactMessage from "./models/message-model";
 
 const sequelize = new Sequelize(process.env.CONNECTION_STRING as string, {
-    models: [User,Booking],
+    models: [User,Booking,ContactMessage],
 });
 
 async function initializeDatabase() {
@@ -14,7 +15,7 @@ async function initializeDatabase() {
         await sequelize.authenticate();
         console.log("✅ Authentication was successful.");
 
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({ alter: false });
         console.log("✅ Migration successful.");
     } catch (error) {
         console.error("❌ Database error:", error);
