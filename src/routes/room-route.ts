@@ -14,12 +14,12 @@ router.route("/room").post(
 
 //fetch all rooms
 router.route("/room").get(
-    asyncErrorHandler(RoomController.createRoom)
+    asyncErrorHandler(RoomController.getAllRooms)
 )
 
 //fetch single room
 router.route("/room/:id").get(
-    asyncErrorHandler(RoomController.createRoom)
+    asyncErrorHandler(RoomController.getRoomById)
 )
 
 //update room(admin)
