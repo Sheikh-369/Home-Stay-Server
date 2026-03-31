@@ -46,6 +46,15 @@ class ContactMessage extends Model {
     allowNull: false,
   })
   declare message: string;
+
+  // Inside ContactMessage class in your model file
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false, // All new messages start as unread
+  })
+  declare read: boolean;
+
 }
 
 export default ContactMessage;

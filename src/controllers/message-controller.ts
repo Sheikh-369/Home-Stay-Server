@@ -59,6 +59,27 @@ class MessageController {
       message: "Message deleted successfully.",
     });
   }
+
+  // ****************** Update Message Status (Mark as Read) ******************
+  static async markAsRead(req: Request, res: Response) {
+    const  id  = req.params.id as string;
+
+    const message = await ContactMessage.findByPk(id);
+
+    if (!message) {
+      res.status(404).json({ message: "Message not found." });
+      return;
+    }
+
+    // Update the read status
+    await message.update({ read: true }); 
+
+    res.status(200).json({
+      message: "Message marked as read.",
+      data: message,
+    });
+  }
+
 }
 
 export default MessageController;

@@ -24,4 +24,11 @@ router.route("/message/:id").delete(
     asyncErrorHandler(MessageController.deleteMessage)
 )
 
+//update message status
+router.route("/message/:id").patch(
+    Middleware.isLoggedIn,
+    Middleware.accessTo(Role.Admin),
+    asyncErrorHandler(MessageController.markAsRead)
+)
+
 export default router
