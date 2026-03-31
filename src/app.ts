@@ -8,6 +8,7 @@ import authRoute from "../src/routes/auth-route"
 import bookingRoute from "../src/routes/booking-route"
 import messageRoute from "../src/routes/message-route"
 import roomRoute from "../src/routes/room-route"
+import occupancyRoute from "../src/routes/occupancy-route"
 
 app.use(express.json())
 
@@ -33,5 +34,8 @@ app.use("/homestay",messageRoute)
 
 //for room
 app.use("/homestay",roomRoute)
+
+//for occupancy
+app.use("/homestay",occupancyRoute)
 
 export default app;
