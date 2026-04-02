@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import Occupancy from '../database/models/occupancy-model';
+import Room from '../database/models/room-model';
 
 export class OccupancyController {
   
@@ -21,6 +22,10 @@ export class OccupancyController {
         status: 'active',
         totalPaid: 0
       });
+
+      //updating room occupancy
+      // Mark the selected room as Occupied
+      await Room.update({ status: 'Occupied' }, { where: { roomNumber } });
 
       res.status(200).json({ success: true, data: newOccupancy });
     } catch (error: any) {
@@ -54,12 +59,19 @@ export class OccupancyController {
         finalBill = guest.rateAmount * diffDays;
       }
 
+      const securityDeposit = Number(guest.securityDeposit) || 0;
+      const finalAmountToCollect = finalBill - securityDeposit;
+
       // Update record to final state
       await guest.update({
         exitDate: actualExitDate,
         status: 'checked-out',
-        adminNotes: `Stayed for ${diffDays} days. Final Bill: ₹${finalBill.toFixed(2)}`
+        // Update the notes so you can see the math later
+        adminNotes: `Stayed ${diffDays} days. Total: ₹${finalBill.toFixed(2)}. Deposit: ₹${securityDeposit}. Collected: ₹${finalAmountToCollect.toFixed(2)}`
       });
+
+      // Free up the room again
+      await Room.update({ status: 'Vacant' }, { where: { roomNumber: guest.roomNumber } });
 
       res.status(200).json({ 
         success: true, 
