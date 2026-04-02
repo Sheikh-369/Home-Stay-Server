@@ -4,11 +4,11 @@ import cors from "cors"
 const app = express();
 import "./database/connection"
 
-import authRoute from "../src/routes/auth-route"
-import bookingRoute from "../src/routes/booking-route"
-import messageRoute from "../src/routes/message-route"
-import roomRoute from "../src/routes/room-route"
-import occupancyRoute from "../src/routes/occupancy-route"
+import authRoute from "./routes/auth-route"
+import bookingRoute from "./routes/booking-route"
+import messageRoute from "./routes/message-route"
+import roomRoute from "./routes/room-route"
+import occupancyRoute from "./routes/occupancy-route"
 
 app.use(express.json())
 
