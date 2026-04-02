@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import app from './app';
 import { config } from 'dotenv';
 config();                          // Load .env variables

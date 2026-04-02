@@ -16,7 +16,8 @@ app.use(
   cors({
     origin:[
       "http://localhost:4028",
-      "http://localhost:3000"
+      "http://localhost:3000",
+      "https://home-stay-client.vercel.app"
     ],  //do not use slash(/) here
 
     credentials: true
